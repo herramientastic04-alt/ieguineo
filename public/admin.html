@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel El Guineo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b2766">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/img/icon-64.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;0,800;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="assets/vendor/quill.snow.css?v=1">
+<link rel="stylesheet" href="assets/css/base.css?v=1">
+<link rel="stylesheet" href="assets/css/admin.css?v=1">
+</head>
+<body class="admin">
+
+<!-- Inicio de sesión -->
+<div class="login" id="pantalla-login" hidden>
+  <div class="login-caja">
+    <img src="assets/img/escudo-160.webp" alt="Escudo de la I.E. El Guineo" width="104" height="102">
+    <h1>Panel de administración</h1>
+    <p class="login-sub">Institución Educativa El Guineo</p>
+    <form id="form-login" novalidate>
+      <div class="campo">
+        <label for="login-usuario">Usuario</label>
+        <input type="text" id="login-usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      </div>
+      <div class="campo">
+        <label for="login-clave">Contraseña</label>
+        <div class="clave-fila">
+          <input type="password" id="login-clave" autocomplete="current-password" required>
+          <button type="button" class="boton discreto" id="ver-clave" aria-pressed="false">Mostrar</button>
+        </div>
+      </div>
+      <p class="error-form" id="login-error" role="alert" hidden></p>
+      <button class="boton" type="submit" id="login-enviar">Ingresar</button>
+    </form>
+    <p class="login-volver"><a href="./">Volver al sitio</a></p>
+    <p class="login-demo" id="login-demo" hidden>Vista previa sin servidor: los cambios se guardan solo en este navegador.</p>
+  </div>
+</div>
+
+<!-- Panel -->
+<div class="panel" id="panel" hidden>
+  <aside class="barra" id="barra">
+    <a class="barra-marca" href="#resumen">
+      <img src="assets/img/escudo-160.webp" alt="" width="44" height="43">
+      <span><strong>El Guineo</strong><small>Administración</small></span>
+    </a>
+    <nav class="barra-nav" aria-label="Secciones del panel">
+      <a href="#resumen" data-v="resumen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1v-7.5Z"/></svg>Resumen</a>
+      <a href="#noticias" data-v="noticias">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h11v14H6a1 1 0 0 1-1-1V5Zm11 4h3v9a1 1 0 0 1-1 1h-2M8 9h5M8 12.5h5M8 16h3"/></svg>Noticias</a>
+      <a href="#documentos" data-v="documentos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10A.5.5 0 0 1 7 20V3.5Zm7 0v4h4M9.5 12h6M9.5 15.5h6"/></svg>Documentos</a>
+      <a href="#institucion" data-v="institucion">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.5 12 4l8.5 5.5M5.5 10v8M10 10v8M14 10v8M18.5 10v8M3.5 20h17"/></svg>Institución</a>
+      <a href="#simbolos" data-v="simbolos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6v6c0 4.2-3 7.2-7 8.5-4-1.3-7-4.3-7-8.5V6l7-2.5Z"/></svg>Símbolos</a>
+      <a href="#contacto" data-v="contacto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></svg>Contacto y aviso</a>
+      <a href="#ajustes" data-v="ajustes">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5M6 10.5h12v9H6v-9Zm6 3.5v2"/></svg>Usuario y contraseña</a>
+    </nav>
+    <div class="barra-pie">
+      <a href="./" target="_blank" rel="noopener">Ver el sitio</a>
+      <button type="button" id="cerrar-sesion">Cerrar sesión</button>
+    </div>
+  </aside>
+  <div class="area">
+    <header class="area-cabeza">
+      <button class="boton discreto menu-admin" id="menu-admin" aria-expanded="false" aria-controls="barra">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        Menú
+      </button>
+      <span class="area-usuario" id="area-usuario"></span>
+    </header>
+    <div class="avisos-panel">
+      <div class="aviso-panel alerta" id="aviso-clave" hidden>
+        <p><strong>Estás usando la contraseña inicial.</strong> Cualquier persona que la conozca puede entrar al panel. Cámbiala por una propia.</p>
+        <a class="boton" href="#ajustes">Cambiar contraseña</a>
+      </div>
+      <div class="aviso-panel" id="aviso-demo" hidden>
+        <p><strong>Vista previa sin servidor.</strong> Lo que publiques se guarda solo en este navegador. Si ves este aviso en el sitio publicado en Netlify, las funciones no se desplegaron: revisa la guía de instalación.</p>
+      </div>
+    </div>
+    <main class="vista-admin" id="vista-admin" tabindex="-1"></main>
+  </div>
+</div>
+
+<!-- Confirmación -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-caja" role="alertdialog" aria-modal="true" aria-labelledby="modal-titulo" aria-describedby="modal-texto">
+    <h2 id="modal-titulo"></h2>
+    <p id="modal-texto"></p>
+    <div class="modal-acciones">
+      <button type="button" class="boton secundario" id="modal-cancelar">Cancelar</button>
+      <button type="button" class="boton peligro" id="modal-aceptar">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/vendor/purify.min.js?v=1"></script>
+<script src="assets/vendor/quill.min.js?v=1"></script>
+<script src="assets/js/defaults.js?v=1"></script>
+<script src="assets/js/api.js?v=1"></script>
+<script src="assets/js/admin.js?v=1"></script>
+</body>
+</html>

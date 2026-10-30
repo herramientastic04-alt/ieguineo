@@ -1,0 +1,16 @@
+{
+  "name": "ie-el-guineo-web",
+  "version": "1.0.0",
+  "description": "Sitio web de la Institución Educativa El Guineo (Canalete, Córdoba) con panel de administración en Netlify",
+  "scripts": {
+    "defaults": "node scripts/generar-defaults.mjs",
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.1.7"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}
